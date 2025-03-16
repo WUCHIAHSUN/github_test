@@ -14,7 +14,7 @@ import com.example.a365test.API.Data.UserDetailData;
 import com.example.a365test.API.Data.UsersListData;
 import com.google.gson.Gson;
 
-public class ApiManager extends ViewModel {
+public class ApiManager {
     private int mTag = 0;
 
     private static String TAG = "ApiManager";
