@@ -49,6 +49,7 @@ public class HomeFragment extends BaseFragment implements AdapterListener {
             viewModel.isBottomListener(dataBinding.userRv);
 
             viewModel.since.setValue(0);
+            showProgressView();
             viewModel.getListApi();
         }
 
@@ -67,12 +68,14 @@ public class HomeFragment extends BaseFragment implements AdapterListener {
             adapter.notifyItemChanged(adapter.getItemCount()-21);
             adapter.submitList(userData.getData());
             viewModel.getIsBottom().setValue(false);
+            dismissProgressView();
         });
 
         viewModel.getIsBottom().observe(getViewLifecycleOwner(), isBottom -> {
             if (isBottom == null) return;
             if (isBottom) {
                 viewModel.since.setValue(viewModel.getUsersListData().getValue().getData().get(viewModel.getUsersListData().getValue().getData().size() - 1).getId() + 1);
+                showProgressView();
                 viewModel.getListApi();
             }
         });

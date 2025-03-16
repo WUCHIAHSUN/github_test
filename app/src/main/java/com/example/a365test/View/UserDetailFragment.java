@@ -43,12 +43,16 @@ public class UserDetailFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        showProgressView();
         getParentFragmentManager().setFragmentResultListener("requestKey", getViewLifecycleOwner(), new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
                 viewModel.getListApi(result.getInt("position"));
                 getBaseActivity().setTitleName(result.getString("name"));
             }
+        });
+        viewModel.getName().observe(getViewLifecycleOwner(), name -> {
+            dismissProgressView();
         });
     }
 }
